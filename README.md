@@ -15,6 +15,4 @@ Display progress dialog
 
 Check GPS
 
-Check internet
-
 Print Data in Textfile
