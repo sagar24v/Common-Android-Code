@@ -1,0 +1,127 @@
+## Display alert dialog
+
+            AlertDialog.Builder dialog = new AlertDialog.Builder(context);
+            dialog.setTitle("Oops...");
+            dialog.setMessage("No internet connection!");
+            dialog.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    
+                }
+            });
+            dialog.show();
+
+## Task in backgound with compete call back
+
+public class load extends AsyncTask<Void, Void, Void> {
+        private load() {
+            execute();
+        }
+        @Override
+        protected Void doInBackground(Void... params) {
+
+            return null;
+        }
+        @Override
+        protected void onPreExecute() {
+        }
+        @Override
+        protected void onPostExecute(Void aVoid) {
+
+        }
+    }
+
+## Change date formate
+
+    DateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd");
+    DateFormat outputFormat = new SimpleDateFormat("dd MMM yyyy");
+    String inputDateStr="2013-06-24";
+    Date date = inputFormat.parse(inputDateStr);
+    String outputDateStr = outputFormat.format(date);
+
+## Enable disable touch of screen
+
+    getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+                         WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+
+    getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+
+## Get size of screen
+
+    public int getScreenWidth() {
+        return Resources.getSystem().getDisplayMetrics().widthPixels;
+    }
+
+    public int getScreenHeight() {
+        return Resources.getSystem().getDisplayMetrics().heightPixels;
+    }
+
+## Display progress dialog
+
+    private static ProgressDialog pd = null;
+
+    public static void displayProgressDialog(Context context) {
+        try {
+            if (pd != null && pd.isShowing()) {
+                return;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        try {
+            pd = new ProgressDialog(context);
+            pd.setMessage("Please Wait...!");
+            pd.setCancelable(false);
+            pd.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void stopProgressDialog() {
+        try {
+            if (pd != null && pd.isShowing()) {
+                pd.cancel();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+## Check GPS
+
+    public boolean isGpsEnabled(Context context) {
+        LocationManager lm = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
+        return lm.isProviderEnabled(LocationManager.GPS_PROVIDER);
+    }
+
+## Print Data in Textfile
+  
+  String storagestate = Environment.getExternalStorageState();
+                File documentsFolder = null;
+                if (storagestate.equals(Environment.MEDIA_MOUNTED)){
+                    documentsFolder = new File(Environment.getExternalStorageDirectory(),
+                            "Download" + File.separator + "FW");
+                    if (!documentsFolder.exists()) {
+                        documentsFolder.mkdirs();
+                    }
+                    File logFile = new File(documentsFolder.getPath() + File.separator + new SimpleDateFormat("yyyy-MM-dd").format(new Date()) + ".txt");
+                    if (!logFile.exists()) {
+                        try {
+                            logFile.createNewFile();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    try {
+                        BufferedWriter buf = new BufferedWriter(new FileWriter(logFile, true));
+                        String LF = "\n";
+                        buf.append(new StringBuilder(String.valueOf(new Date().toString())).append(LF).toString());
+                        buf.append(text);
+                        buf.newLine();
+                        buf.close();
+                    } catch (IOException e2) {
+                        e2.printStackTrace();
+                    }
+                }
