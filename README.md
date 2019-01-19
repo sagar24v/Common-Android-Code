@@ -16,3 +16,11 @@ Display progress dialog
 Check GPS
 
 Print Data in Textfile
+
+Get context of activity or fregment
+
+Run task in background
+
+Get IMEI
+
+Get IP Address
